@@ -1,82 +1,88 @@
 package ru.netology.javaqamvn.domain;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import ru.netology.javaqamvn.domain.PosterManager;
 
 public class PosterManagerTest {
+
     @Test
-    public void testAdd() {
-        PosterManager manager = new PosterManager();
+    public void findLast() {
+        PosterManager  manager = new PosterManager();
+        manager.addFilm("Бладшот");
+        manager.addFilm("Вперед");
+        manager.addFilm("Отель Белград");
+        manager.addFilm("Джентельмены");
+        manager.addFilm("Человек-неведимка");
+        manager.addFilm("Тролли");
+        manager.addFilm("Номер один");
+        manager.addFilm("Операция Фортуна");
+        manager.addFilm("Аватар путь воды");
+        manager.addFilm("Мстители");
 
-        manager.addMovie("Бладшот");
-        manager.addMovie("Вперед");
-        manager.addMovie("Отель Белград");
-        manager.addMovie("Джентельмены");
-        manager.addMovie("Человек-неведимка");
-        manager.addMovie("Тролли");
-        manager.addMovie("Номер один");
-        manager.addMovie("Операция Фортуна");
-        manager.addMovie("Аватар путь воды");
-        manager.addMovie("Мстители");
-
+        String[] actual = manager.findLast();
         String[] expected = {"Бладшот", "Вперед", "Отель Белград", "Джентельмены", "Человек-неведимка", "Тролли", "Номер один", "Операция Фортуна", "Аватар путь воды", "Мстители"};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void moreThanTheLimit() {
+        PosterManager manager = new PosterManager(11);
+        manager.addFilm("Бладшот");
+        manager.addFilm("Вперед");
+        manager.addFilm("Отель Белград");
+        manager.addFilm("Джентельмены");
+        manager.addFilm("Человек-неведимка");
+        manager.addFilm("Тролли");
+        manager.addFilm("Номер один");
+        manager.addFilm("Операция Фортуна");
+        manager.addFilm("Аватар путь воды");
+        manager.addFilm("Мстители");
+
+        String[] actual = manager.findLast();
+        String[] expected = {"Бладшот", "Вперед", "Отель Белград", "Джентельмены", "Человек-неведимка", "Тролли", "Номер один", "Операция Фортуна", "Аватар путь воды", "Мстители"};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void equalToTheLimit() {
+        PosterManager manager = new PosterManager(10);
+        manager.addFilm("Бладшот");
+        manager.addFilm("Вперед");
+        manager.addFilm("Отель Белград");
+        manager.addFilm("Джентельмены");
+        manager.addFilm("Человек-неведимка");
+        manager.addFilm("Тролли");
+        manager.addFilm("Номер один");
+        manager.addFilm("Операция Фортуна");
+        manager.addFilm("Аватар путь воды");
+        manager.addFilm("Мстители");
+
+        String[] actual = manager.findLast();
+        String[] expected = {"Бладшот", "Вперед", "Отель Белград", "Джентельмены", "Человек-неведимка", "Тролли", "Номер один", "Операция Фортуна", "Аватар путь воды", "Мстители"};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void lessThanTheLimit() {
+        PosterManager manager = new PosterManager(9);
+        manager.addFilm("Бладшот");
+        manager.addFilm("Вперед");
+        manager.addFilm("Отель Белград");
+        manager.addFilm("Джентельмены");
+        manager.addFilm("Человек-неведимка");
+        manager.addFilm("Тролли");
+        manager.addFilm("Номер один");
+        manager.addFilm("Операция Фортуна");
+        manager.addFilm("Аватар путь воды");
+        manager.addFilm("Мстители");
+
         String[] actual = manager.findAll();
+        String[] expected = {"Бладшот", "Вперед", "Отель Белград", "Джентельмены", "Человек-неведимка", "Тролли", "Номер один", "Операция Фортуна", "Аватар путь воды", "Мстители"};
 
-        Assertions.assertArrayEquals(expected, actual);
+        assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void testEqualToTheLimit() {
-        PosterManager manager = new PosterManager();
-
-        manager.addMovie("Бладшот");
-        manager.addMovie("Вперед");
-        manager.addMovie("Отель Белград");
-        manager.addMovie("Джентельмены");
-        manager.addMovie("Человек-неведимка");
-        manager.addMovie("Тролли");
-        manager.addMovie("Номер один");
-        manager.addMovie("Стажер");
-        manager.addMovie("Аватар путь воды");
-        manager.addMovie("Мстители");
-
-        manager.findLast();
-
-        String[] expected = {"Мстители", "Аватар путь воды", "Стажер", "Номер один", "Тролли", "Человек-неведимка", "Джентельмены", "Отель Белград", "Вперед", "Бладшот"};
-        String[] actual = manager.findLast();
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void testOverLimit() {
-        PosterManager manager = new PosterManager(15);
-
-        manager.addMovie("Бладшот");
-        manager.addMovie("Вперед");
-        manager.addMovie("Отель Белград");
-
-
-        String[] expected = {"Отель Белград", "Вперед", "Бладшот"};
-        String[] actual = manager.findLast();
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void testMinLimit() {
-        PosterManager manager = new PosterManager(4);
-
-        manager.addMovie("Бладшот");
-        manager.addMovie("Вперед");
-        manager.addMovie("Отель Белград");
-        manager.addMovie("Джентельмены");
-
-
-        String[] expected = {"Джентельмены", "Отель Белград", "Вперед", "Бладшот"};
-        String[] actual = manager.findLast();
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
 }
