@@ -27,7 +27,7 @@ public class PosterManagerTest {
     }
 
     @Test
-    public void testFindLast() {
+    public void testEqualToTheLimit() {
         PosterManager manager = new PosterManager();
 
         manager.addMovie("Бладшот");
@@ -50,7 +50,7 @@ public class PosterManagerTest {
     }
 
     @Test
-    public void testFindOverLimit() {
+    public void testOverLimit() {
         PosterManager manager = new PosterManager(15);
 
         manager.addMovie("Бладшот");
@@ -65,7 +65,7 @@ public class PosterManagerTest {
     }
 
     @Test
-    public void testFindLessLimit() {
+    public void testMinLimit() {
         PosterManager manager = new PosterManager(4);
 
         manager.addMovie("Бладшот");

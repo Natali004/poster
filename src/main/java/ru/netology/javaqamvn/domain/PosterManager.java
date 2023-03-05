@@ -1,7 +1,6 @@
 package ru.netology.javaqamvn.domain;
 
-public class PosterManager
-{
+public class PosterManager {
     String[] title = new String[0];
     private int limit;
 
