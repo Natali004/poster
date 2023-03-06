@@ -31,11 +31,13 @@ public class PosterManager {
 
     public String[] findLast() {
         int resultLength;
-        if (limit <= films.length) {
-            resultLength = limit;
-        } else {
+
+        if (films.length < limit) {
             resultLength = films.length;
+        } else {
+            resultLength = limit;
         }
+
         String[] tmp = new String[resultLength];
         for (int i = 0; i < tmp.length; i++) {
             tmp[i] = films[films.length - 1 - i];
